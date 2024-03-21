@@ -20,13 +20,14 @@ async function pokemonShow() {
         pokemonDataArray = [...pokemonData.results]
         //Igualando o pokemon atual com o índice da variável
         let currentPokemon = pokemonData.results[pokemonIndex]
+        //Extraindo o nome do pokemon
         pokemonName.innerHTML = `- ${currentPokemon.name}`
+        //Fazendo requisição ao link associado ao pokemon, onde contém os dadoss
         let currentPokemonData = await  (await fetch(currentPokemon.url)).json()
-        console.log(currentPokemon)
+        //Usando os dados da fatch para fazer alterações no visual da página
         pokemonNumber.innerHTML = `${currentPokemonData.id}`
         pokeImg.src = `${currentPokemonData.sprites.front_default}`
     }
-
     catch(error){
         window.alert('Não existe nenhum pokemon condizente a esse número nesse pokedex!')
     }
@@ -68,15 +69,15 @@ const searchPokemon = () => {
         pokemonDataArray.forEach((element, index) =>{
            if(element.name == currentInput){
                 pokemonIndex = index
-                pokemonShow()
                 found = true
+                pokemonShow()
+                
            }
         })
-        if(!false){
+        if(!found){
             window.alert('Não existe pokemon com esse nome nesse pokedex!')
         }
     }
-
 }
 
 //Event Listeners
