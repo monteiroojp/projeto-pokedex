@@ -1,42 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--Fonts-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <!--CSS-->
     <link rel="stylesheet" href="css/style.css">
+    <!--JS-->
     <script src="script.js" defer></script>
     <title>Pokedex</title>
 </head>
 <body>
-    <main>
-        <section class="pokedex">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" alt="Pokemon-Img">
-            <div>
-                <input type="text" placeholder="Pokemon Name">
-                <button id="search-button">Search</button>
-            </div>
-            <div id="datas">
-                <div class="weigh">
-                    <h2>00.00KG</h2>
-                    <p>Weight</p>
-                </div>
-                <div class="height">
-                    <h2>2.5M</h2>
-                    <p>Height</p>
-                </div>
-            </div>
-            <div class="stats">
-                <h3>HP:</h3>
-                <h3>Attack:</h3>
-                <h3>Defense:</h3>
-                <h3>Special-attack:</h3>
-                <h3>Special-defense:</h3>
-                <h3>Speed:</h3>
-            </div>
-                
-        </section>
-            
-        </div>
-    </main>
+<main>
+    <img src="#" alt="pokemon-Img" id="pokeImg">
+    <div class="name-and-id">
+        <p id="pokemonNumber"></p>
+        <p id="pokemonName"></p>
+    </div>
+    <input type="search" name="" id="searchInpt" placeholder="Name or Number">
+    <button id="search"><span class="material-symbols-outlined">search</span>
+        </button>
+    <div class="buttons">
+        <button id="previousButton"><span class="material-symbols-outlined">arrow_back_ios</span></button>   
+        <button id="nextButton"><span class="material-symbols-outlined">arrow_forward_ios</span></button>      
+    </div>
+</main>
+
 </body>
 </html>
