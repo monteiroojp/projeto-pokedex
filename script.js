@@ -70,8 +70,7 @@ const searchPokemon = () => {
            if(element.name == currentInput){
                 pokemonIndex = index
                 found = true
-                pokemonShow()
-                
+                pokemonShow()         
            }
         })
         if(!found){

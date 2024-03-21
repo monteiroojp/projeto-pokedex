@@ -66,12 +66,13 @@ input{
 button{
     background-color: black;
     color: white;
-    width: 60px;
+    width: 80px;
     height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    padding: 0.5rem;
 }
 
 div.buttons{
