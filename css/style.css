@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    width: 100vw;
+    background-color: darksalmon;
+}
+
+main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+section.pokedex{
+    background-color: white;
+    border-radius: 10px;
+    border: 10px solid red;
+    outline: 10px solid black;
+}
+
