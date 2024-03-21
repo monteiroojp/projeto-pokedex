@@ -6,30 +6,30 @@ const searchButton = document.getElementById('search')
 let pokeImg = document.getElementById('pokeImg')
 let pokemonNumber = document.getElementById('pokemonNumber')
 let pokemonName = document.getElementById('pokemonName')
-let pokemonIndex = 0
-let pokemonData;
-let pokemonDataArray;
-//Funções
+let pokemonIndex = 1
+let nonExist = false
 
+//Funções
 async function pokemonShow() {
     try{
-        //Recebimento da data contendo todos pokemons possíveis da API
-        const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0.")
-        pokemonData = await response.json()
-        //Transformando os possíveis pokemons em uma array
-        pokemonDataArray = [...pokemonData.results]
-        //Igualando o pokemon atual com o índice da variável
-        let currentPokemon = pokemonData.results[pokemonIndex]
-        //Extraindo o nome do pokemon
-        pokemonName.innerHTML = `- ${currentPokemon.name}`
-        //Fazendo requisição ao link associado ao pokemon, onde contém os dadoss
-        let currentPokemonData = await  (await fetch(currentPokemon.url)).json()
-        //Usando os dados da fatch para fazer alterações no visual da página
-        pokemonNumber.innerHTML = `${currentPokemonData.id}`
-        pokeImg.src = `${currentPokemonData.sprites.front_default}`
+        //Recebimento da data do pokemon
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonIndex}`)
+        let pokemonData = await response.json()
+        pokemonIndex = pokemonData.id
+
+        //Renderização do pokemon
+        pokemonName.innerHTML = `- ${pokemonData.name}`
+        pokemonNumber.innerHTML = pokemonData.id
+        pokeImg.src = pokemonData.sprites.front_default
+        pokeImg.style.visibility = 'visible'
     }
     catch(error){
-        window.alert('Não existe nenhum pokemon condizente a esse número nesse pokedex!')
+        pokeImg.style.visibility = 'hidden'
+        pokemonNumber.innerHTML = 'Não encontrado'
+        pokemonName.innerHTML = ''
+        console.error(error)
+        pokemonIndex = 2
+        nonExist = true
     }
 }
 
@@ -37,19 +37,20 @@ pokemonShow()
 
 const nextPokemon = () =>{
     pokemonIndex++
-    if(pokemonIndex > 1301){
-        pokemonIndex = 0
+    if(pokemonIndex > 1025 || nonExist == true){
+        pokemonIndex = 1
         pokemonShow()
     }
     else{
         pokemonShow()
     }
+    
 }
 
 const previousPokemon = () =>{
     pokemonIndex--
-    if(pokemonIndex < 0){
-        pokemonIndex = 1301
+    if(pokemonIndex == 0){
+        pokemonIndex = 1025
         pokemonShow()
     }
     else{
@@ -58,25 +59,11 @@ const previousPokemon = () =>{
 }
 
 const searchPokemon = () => {
-    let currentInput = searchInput.value.trim(); 
-    let nameorId = /^[0-9]+$/.test(currentInput);
-    if (nameorId) {
-        pokemonIndex = Number(currentInput) - 1
-        pokemonShow()
-    } 
-    else{
-        let found = false
-        pokemonDataArray.forEach((element, index) =>{
-           if(element.name == currentInput){
-                pokemonIndex = index
-                found = true
-                pokemonShow()         
-           }
-        })
-        if(!found){
-            window.alert('Não existe pokemon com esse nome nesse pokedex!')
-        }
-    }
+    let currentInput = searchInput.value.trim().toLowerCase(); 
+    pokemonIndex = currentInput
+    searchInput.value = ''
+    searchInput.focus()
+    pokemonShow()
 }
 
 //Event Listeners
